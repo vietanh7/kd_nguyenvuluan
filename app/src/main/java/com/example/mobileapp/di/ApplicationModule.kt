@@ -1,4 +1,4 @@
-package com.example.mobileapp.di.module
+package com.example.mobileapp.di
 
 import com.example.mobileapp.data.api.ApiHelper
 import com.example.mobileapp.data.api.ApiHelperImpl
