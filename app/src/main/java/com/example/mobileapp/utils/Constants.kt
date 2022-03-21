@@ -25,5 +25,8 @@ class Constants {
         const val status = "status"
         const val header = "Bearer"
         const val KEY_HEADER_TOKEN = "KEY_HEADER_TOKEN"
+
+        const val TYPE_CLICK_EDIT = 1
+        const val TYPE_CLICK_DELETE = 2
     }
 }

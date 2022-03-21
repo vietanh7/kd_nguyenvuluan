@@ -3,8 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/productFragment">
 
+    <fragment
+        android:id="@+id/productFragment"
+        android:name="com.example.mobileapp.ui.ProductFragment"
+        android:label="ProductFragment"
+        tools:layout="@layout/fragment_product">
+        <action
+            android:id="@+id/action_productFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_productFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.mobileapp.ui.LoginFragment"
@@ -21,12 +33,13 @@
         android:id="@+id/registerFragment"
         android:name="com.example.mobileapp.ui.RegisterFragment"
         android:label="RegisterFragment"
-        tools:layout="@layout/fragment_register" />
-    <fragment
-        android:id="@+id/productFragment"
-        android:name="com.example.mobileapp.ui.ProductFragment"
-        android:label="ProductFragment"
-        tools:layout="@layout/fragment_product" />
-
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_productFragment"
+            app:destination="@id/productFragment" />
+    </fragment>
 
 </navigation>

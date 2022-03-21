@@ -79,6 +79,7 @@ class LoginFragment : Fragment(), ILoadingView {
         viewModel.login(email, password)
         viewModel.loginResponse.observe(viewLifecycleOwner, {
             when (it.status) {
+                Status.LOADING -> onShowLoading()
                 Status.SUCCESS -> {
                     onHideLoading()
                     it.data?.token?.let { token ->
@@ -87,7 +88,7 @@ class LoginFragment : Fragment(), ILoadingView {
                         findNavController().navigate(R.id.productFragment)
                     }
                 }
-                Status.LOADING -> onShowLoading()
+
                 Status.ERROR -> {
                     onHideLoading()
                     onShowError(true, resources.getString(R.string.wrong_login))
@@ -111,20 +112,6 @@ class LoginFragment : Fragment(), ILoadingView {
         })
     }
 
-    private fun getAllProducts(token: String?) {
-        val header = Constants.header + token
-        viewModel.getAllProducts(header)
-        viewModel.getAllProductsResponse.observe(viewLifecycleOwner, {
-            when (it.status) {
-                Status.SUCCESS -> Log.d(TAG, "GET ALL PRODUCTS SUCCESS")
-
-                Status.LOADING -> {
-                }
-                Status.ERROR -> {
-                }
-            }
-        })
-    }
 
     private fun checkLogin() {
         user.apply {

@@ -1,3 +1,5 @@
 package com.example.mobileapp.utils
 
-typealias onItemClick = () -> Unit
+import com.example.mobileapp.data.model.response.ProductResponse
+
+typealias OnItemClick = (data: ProductResponse, typeClick: Int) -> Unit

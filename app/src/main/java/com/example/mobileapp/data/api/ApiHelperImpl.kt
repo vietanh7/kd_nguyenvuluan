@@ -1,7 +1,6 @@
 package com.example.mobileapp.data.api
 
 import com.example.mobileapp.data.model.request.ProductRequest
-import com.example.mobileapp.data.model.response.ListProductResponse
 import com.example.mobileapp.data.model.response.LoginResponse
 import com.example.mobileapp.data.model.response.ProductResponse
 import com.example.mobileapp.data.model.response.RegisterResponse
@@ -15,7 +14,7 @@ class ApiHelperImpl @Inject constructor(private val apiService: ApiService) : Ap
     override suspend fun login(email: String, password: String): Response<LoginResponse> =
         apiService.login(email, password)
 
-    override suspend fun getAllProducts(header: String?): Response<ListProductResponse> =
+    override suspend fun getAllProducts(header: String?): Response<MutableList<ProductResponse>> =
         apiService.getAllProducts(header)
 
     override suspend fun addProduct(header: String?, request: ProductRequest): Response<ProductResponse> =

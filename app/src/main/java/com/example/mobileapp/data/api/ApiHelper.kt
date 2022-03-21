@@ -1,7 +1,6 @@
 package com.example.mobileapp.data.api
 
 import com.example.mobileapp.data.model.request.ProductRequest
-import com.example.mobileapp.data.model.response.ListProductResponse
 import com.example.mobileapp.data.model.response.LoginResponse
 import com.example.mobileapp.data.model.response.ProductResponse
 import com.example.mobileapp.data.model.response.RegisterResponse
@@ -13,9 +12,9 @@ interface ApiHelper {
 
     suspend fun login(email: String, password: String): Response<LoginResponse>
 
-    suspend fun getAllProducts(header: String?): Response<ListProductResponse>
+    suspend fun getAllProducts(header: String?): Response<MutableList<ProductResponse>>
 
-    suspend fun addProduct(header: String?, request: ProductRequest) : Response<ProductResponse>
+    suspend fun addProduct(header: String?, request: ProductRequest): Response<ProductResponse>
 
     suspend fun updateProduct(header: String?, request: ProductRequest): Response<ProductResponse>
 

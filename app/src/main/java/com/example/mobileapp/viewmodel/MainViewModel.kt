@@ -3,7 +3,6 @@ package com.example.mobileapp.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mobileapp.data.model.request.ProductRequest
-import com.example.mobileapp.data.model.response.ListProductResponse
 import com.example.mobileapp.data.model.response.LoginResponse
 import com.example.mobileapp.data.model.response.ProductResponse
 import com.example.mobileapp.data.model.response.RegisterResponse
@@ -23,7 +22,8 @@ class MainViewModel @Inject constructor(
 
     var registerResponse: SingleLiveEvent<Resource<RegisterResponse>> = SingleLiveEvent()
     var loginResponse: SingleLiveEvent<Resource<LoginResponse>> = SingleLiveEvent()
-    var getAllProductsResponse: SingleLiveEvent<Resource<ListProductResponse>> = SingleLiveEvent()
+    var getAllProductsResponse: SingleLiveEvent<Resource<MutableList<ProductResponse>>> =
+        SingleLiveEvent()
     var addProductResponse: SingleLiveEvent<Resource<ProductResponse>> = SingleLiveEvent()
     var updateProductResponse: SingleLiveEvent<Resource<ProductResponse>> = SingleLiveEvent()
     var deleteProductResponse: SingleLiveEvent<Resource<ProductResponse>> = SingleLiveEvent()

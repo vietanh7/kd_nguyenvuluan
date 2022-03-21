@@ -101,7 +101,6 @@
             android:hint="@string/email"
             android:paddingHorizontal="@dimen/_12sdp"
             android:textColor="@color/black"
-            android:textColorHint="@color/grey"
             android:textSize="@dimen/_12sdp"
             android:textStyle="normal" />
 
@@ -129,7 +128,6 @@
             android:inputType="textPassword"
             android:paddingHorizontal="@dimen/_12sdp"
             android:textColor="@color/black"
-            android:textColorHint="@color/grey"
             android:textSize="@dimen/_12sdp"
             android:textStyle="normal" />
 
@@ -157,7 +155,6 @@
             android:inputType="textPassword"
             android:paddingHorizontal="@dimen/_12sdp"
             android:textColor="@color/black"
-            android:textColorHint="@color/grey"
             android:textSize="@dimen/_12sdp"
             android:textStyle="normal" />
 

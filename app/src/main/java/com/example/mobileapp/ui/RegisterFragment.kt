@@ -75,11 +75,11 @@ class RegisterFragment : Fragment(), ILoadingView {
         viewModel.register(email, password)
         viewModel.registerResponse.observe(viewLifecycleOwner, {
             when (it.status) {
+                Status.LOADING -> onShowLoading()
                 Status.SUCCESS -> {
                     onHideLoading()
                     doLogin(email, password)
                 }
-                Status.LOADING -> onShowLoading()
                 Status.ERROR -> {
                     onHideLoading()
                     onShowError(true, resources.getString(R.string.wrong_login))
@@ -92,6 +92,7 @@ class RegisterFragment : Fragment(), ILoadingView {
         viewModel.login(email, password)
         viewModel.loginResponse.observe(viewLifecycleOwner, {
             when (it.status) {
+                Status.LOADING -> onShowLoading()
                 Status.SUCCESS -> {
                     onHideLoading()
                     it.data?.token?.let { token ->
@@ -100,7 +101,6 @@ class RegisterFragment : Fragment(), ILoadingView {
                         findNavController().navigate(R.id.productFragment)
                     }
                 }
-                Status.LOADING -> onShowLoading()
                 Status.ERROR -> {
                     onHideLoading()
                     onShowError(true, resources.getString(R.string.wrong_login))

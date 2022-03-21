@@ -1,7 +1,5 @@
 package com.example.mobileapp.data.api
 
-import com.example.mobileapp.data.model.request.ProductRequest
-import com.example.mobileapp.data.model.response.ListProductResponse
 import com.example.mobileapp.data.model.response.LoginResponse
 import com.example.mobileapp.data.model.response.ProductResponse
 import com.example.mobileapp.data.model.response.RegisterResponse
@@ -23,19 +21,19 @@ interface ApiService {
 
     //Get list product
     @GET(Constants.ENDPOINT_LIST_PRODUCT)
-    suspend fun getAllProducts(@Header(Constants.authorization) authorization: String?): Response<ListProductResponse>
+    suspend fun getAllProducts(@Header(Constants.authorization) authorization: String?): Response<MutableList<ProductResponse>>
 
     //Add product
     @FormUrlEncoded
     @POST(Constants.ENDPOINT_ADD_PRODUCT)
     suspend fun addProduct(
         @Header(Constants.authorization) authorization: String?,
-        @Query(Constants.sku) sku: String,
-        @Query(Constants.productName) productName: String,
-        @Query(Constants.qty) qty: Int,
-        @Query(Constants.price) price: Float,
-        @Query(Constants.unit) unit: String,
-        @Query(Constants.status) status: Int
+        @Field(Constants.sku) sku: String,
+        @Field(Constants.productName) productName: String,
+        @Field(Constants.qty) qty: Int,
+        @Field(Constants.price) price: Float,
+        @Field(Constants.unit) unit: String,
+        @Field(Constants.status) status: Int
     ): Response<ProductResponse>
 
     //Update product
@@ -43,11 +41,11 @@ interface ApiService {
     @POST(Constants.ENDPOINT_UPDATE_PRODUCT)
     suspend fun updateProduct(
         @Header(Constants.authorization) authorization: String?,
-        @Query(Constants.sku) sku: String,
-        @Query(Constants.productName) productName: String,
-        @Query(Constants.qty) qty: Int,
-        @Query(Constants.price) price: Float,
-        @Query(Constants.unit) unit: String,
+        @Field(Constants.sku) sku: String,
+        @Field(Constants.productName) productName: String,
+        @Field(Constants.qty) qty: Int,
+        @Field(Constants.price) price: Float,
+        @Field(Constants.unit) unit: String,
         @Query(Constants.status) status: Int
     ): Response<ProductResponse>
 
