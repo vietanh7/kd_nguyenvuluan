@@ -23,5 +23,7 @@ class Constants {
         const val price = "price"
         const val unit = "unit"
         const val status = "status"
+        const val header = "Bearer"
+        const val KEY_HEADER_TOKEN = "KEY_HEADER_TOKEN"
     }
 }

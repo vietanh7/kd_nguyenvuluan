@@ -8,4 +8,11 @@
     <string name="submit">Submit</string>
     <string name="don_t_you_have_an_account_register">Don\'t you have an account? Register</string>
     <string name="confirm_password">Confirm password</string>
+    <string name="loading">Loading…</string>
+    <string name="validation_login">Invalid email or password</string>
+    <string name="wrong_login">Email or password is wrong.</string>
+    <string name="wrong_email">Email format is wrong</string>
+    <string name="blank_email">Email cannot be blank</string>
+    <string name="blank_password">Password cannot be blank</string>
+    <string name="compare_password">Confirm password must be the same with password</string>
 </resources>

@@ -2,6 +2,10 @@ package com.example.mobileapp.data.model.response
 
 import com.google.gson.annotations.SerializedName
 
+data class ListProductResponse(
+    val products: MutableList<ProductResponse> = mutableListOf()
+)
+
 data class ProductResponse(
 
     @SerializedName("id")
