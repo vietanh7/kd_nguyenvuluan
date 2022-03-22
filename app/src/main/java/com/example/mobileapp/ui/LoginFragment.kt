@@ -11,7 +11,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.mobileapp.R
 import com.example.mobileapp.data.model.request.ProductRequest
-import com.example.mobileapp.data.model.response.UserResponse
 import com.example.mobileapp.data.repository.DataStorage
 import com.example.mobileapp.databinding.FragmentLoginBinding
 import com.example.mobileapp.utils.Common
@@ -33,14 +32,11 @@ class LoginFragment : Fragment(), ILoadingView {
     private var binding: FragmentLoginBinding? = null
     private val viewModel: MainViewModel by viewModels()
 
-    private val headerToken: String = DataStorage.getToken()
-    private val user: UserResponse = DataStorage.getUser()
     private lateinit var mProgressDialog: ProgressDialog
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         binding = FragmentLoginBinding.inflate(inflater, container, false)
-        //checkLogin()
         onActionClick()
 
         return binding?.root
@@ -48,11 +44,14 @@ class LoginFragment : Fragment(), ILoadingView {
 
     private fun onActionClick() {
         binding?.btnSubmit?.setOnClickListener {
-            val email = binding?.edtEmail?.text.toString().trim()
-            val password = binding?.edtPassword?.text.toString().trim()
+            val email = binding?.edtEmail?.text.toString()
+            val password = binding?.edtPassword?.text.toString()
             if (validateLogin(email, password)) doLogin(email, password)
         }
         binding?.tvSignUp?.setOnClickListener { findNavController().navigate(R.id.registerFragment) }
+        binding?.icPassword?.setOnClickListener {
+            binding?.edtPassword?.let { Common.togglePassword(it) }
+        }
     }
 
     private fun validateLogin(email: String, password: String): Boolean {
@@ -84,7 +83,6 @@ class LoginFragment : Fragment(), ILoadingView {
                     onHideLoading()
                     it.data?.token?.let { token ->
                         DataStorage.saveToken(token)
-                        DataStorage.saveUser(email, password)
                         findNavController().navigate(R.id.productFragment)
                     }
                 }
@@ -95,30 +93,6 @@ class LoginFragment : Fragment(), ILoadingView {
                 }
             }
         })
-    }
-
-    private fun addProduct(token: String?, request: ProductRequest) {
-        val header = Constants.header + token
-        viewModel.addProduct(header, request)
-        viewModel.addProductResponse.observe(viewLifecycleOwner, {
-            when (it.status) {
-                Status.SUCCESS -> Log.d(TAG, "ADD PRODUCT SUCCESS")
-
-                Status.LOADING -> {
-                }
-                Status.ERROR -> {
-                }
-            }
-        })
-    }
-
-
-    private fun checkLogin() {
-        user.apply {
-            if (email.isNotBlank() && password.isNotBlank()) {
-                doLogin(email, password)
-            }
-        }
     }
 
     override fun onShowLoading() {

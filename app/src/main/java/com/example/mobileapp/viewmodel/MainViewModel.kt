@@ -34,10 +34,10 @@ class MainViewModel @Inject constructor(
         if (networkHelper.isNetworkConnected()) {
             repository.register(email, password).let {
                 if (it.isSuccessful) {
-                    registerResponse.postValue(Resource.success(it.body()))
-                } else registerResponse.postValue(Resource.error(it.errorBody().toString(), null))
+                    registerResponse.value = Resource.success(it.body())
+                } else registerResponse.value = Resource.error(it.errorBody().toString(), null)
             }
-        } else registerResponse.postValue(Resource.error("No internet connection", null))
+        } else registerResponse.value = Resource.error("No internet connection", null)
     }
 
     fun login(email: String, password: String) = viewModelScope.launch {
@@ -45,10 +45,10 @@ class MainViewModel @Inject constructor(
         if (networkHelper.isNetworkConnected()) {
             repository.login(email, password).let {
                 if (it.isSuccessful) {
-                    loginResponse.postValue(Resource.success(it.body()))
-                } else loginResponse.postValue(Resource.error(it.errorBody().toString(), null))
+                    loginResponse.value = Resource.success(it.body())
+                } else loginResponse.value = Resource.error(it.errorBody().toString(), null)
             }
-        } else loginResponse.postValue(Resource.error("No internet connection", null))
+        } else loginResponse.value = Resource.error("No internet connection", null)
     }
 
     fun getAllProducts(header: String?) = viewModelScope.launch {
@@ -56,10 +56,10 @@ class MainViewModel @Inject constructor(
         if (networkHelper.isNetworkConnected()) {
             repository.getAllProducts(header).let {
                 if (it.isSuccessful) {
-                    getAllProductsResponse.postValue(Resource.success(it.body()))
-                } else getAllProductsResponse.postValue(Resource.error(it.errorBody().toString(), null))
+                    getAllProductsResponse.value = Resource.success(it.body())
+                } else getAllProductsResponse.value = Resource.error(it.errorBody().toString(), null)
             }
-        } else getAllProductsResponse.postValue(Resource.error("No internet connection", null))
+        } else getAllProductsResponse.value = Resource.error("No internet connection", null)
     }
 
     fun addProduct(header: String?, request: ProductRequest) = viewModelScope.launch {
@@ -67,10 +67,10 @@ class MainViewModel @Inject constructor(
         if (networkHelper.isNetworkConnected()) {
             repository.addProduct(header, request).let {
                 if (it.isSuccessful) {
-                    addProductResponse.postValue(Resource.success(it.body()))
-                } else addProductResponse.postValue(Resource.error(it.errorBody().toString(), null))
+                    addProductResponse.value = Resource.success(it.body())
+                } else addProductResponse.value = Resource.error(it.errorBody().toString(), null)
             }
-        } else addProductResponse.postValue(Resource.error("No internet connection", null))
+        } else addProductResponse.value = Resource.error("No internet connection", null)
     }
 
     fun updateProduct(header: String?, request: ProductRequest) = viewModelScope.launch {
@@ -78,10 +78,10 @@ class MainViewModel @Inject constructor(
         if (networkHelper.isNetworkConnected()) {
             repository.updateProduct(header, request).let {
                 if (it.isSuccessful) {
-                    updateProductResponse.postValue(Resource.success(it.body()))
-                } else updateProductResponse.postValue(Resource.error(it.errorBody().toString(), null))
+                    updateProductResponse.value = Resource.success(it.body())
+                } else updateProductResponse.value = Resource.error(it.errorBody().toString(), null)
             }
-        } else updateProductResponse.postValue(Resource.error("No internet connection", null))
+        } else updateProductResponse.value = Resource.error("No internet connection", null)
     }
 
     fun deleteProduct(header: String?, sku: String) = viewModelScope.launch {
@@ -89,10 +89,10 @@ class MainViewModel @Inject constructor(
         if (networkHelper.isNetworkConnected()) {
             repository.deleteProduct(header, sku).let {
                 if (it.isSuccessful) {
-                    deleteProductResponse.postValue(Resource.success(it.body()))
-                } else deleteProductResponse.postValue(Resource.error(it.errorBody().toString(), null))
+                    deleteProductResponse.value = Resource.success(it.body())
+                } else deleteProductResponse.value = Resource.error(it.errorBody().toString(), null)
             }
-        } else updateProductResponse.postValue(Resource.error("No internet connection", null))
+        } else updateProductResponse.value = Resource.error("No internet connection", null)
     }
 
     fun searchProduct(header: String?, sku: String) = viewModelScope.launch {
@@ -100,9 +100,9 @@ class MainViewModel @Inject constructor(
         if (networkHelper.isNetworkConnected()) {
             repository.searchProducts(header, sku).let {
                 if (it.isSuccessful) {
-                    searchProductResponse.postValue(Resource.success(it.body()))
-                } else searchProductResponse.postValue(Resource.error(it.errorBody().toString(), null))
+                    searchProductResponse.value = Resource.success(it.body())
+                } else searchProductResponse.value = Resource.error(it.errorBody().toString(), null)
             }
-        } else searchProductResponse.postValue(Resource.error("No internet connection", null))
+        } else searchProductResponse.value = Resource.error("No internet connection", null)
     }
 }

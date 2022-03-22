@@ -30,6 +30,33 @@ class ProductAdapter(val isLoggedIn: Boolean, private val onClick: OnItemClick) 
         notifyDataSetChanged()
     }
 
+    fun deleteProduct(product: ProductResponse) {
+        val updateList: MutableList<ProductResponse> = (currentList - mutableListOf(product)) as MutableList<ProductResponse>
+        submitList(updateList)
+        notifyDataSetChanged()
+    }
+
+    fun updateProduct(product: ProductResponse) {
+        currentList.forEachIndexed {index, element ->
+            if (element.sku.equals(product.sku)) {
+                currentList[index].apply {
+                    id = product.id
+                    sku = product.sku
+                    productName = product.productName
+                    qty = product.qty
+                    price = product.price
+                    unit = product.unit
+                    image = product.image
+                    status = product.status
+                    createdAt = product.createdAt
+                    updated_at = product.updated_at
+                }
+            }
+        }
+        submitList(currentList)
+        notifyDataSetChanged()
+    }
+
     class ProductViewHolder private constructor(val binding: ItemProductBinding, val context: Context) : RecyclerView.ViewHolder(binding.root) {
 
         fun onBind(isLoggedIn: Boolean, product: ProductResponse, onClick: OnItemClick) {
@@ -50,7 +77,7 @@ class ProductAdapter(val isLoggedIn: Boolean, private val onClick: OnItemClick) 
                 onClick.invoke(product, Constants.TYPE_CLICK_EDIT)
             }
             binding.tvDelete.setOnClickListener {
-                onClick.invoke(product, Constants.TYPE_CLICK_DELETE)
+                onClick.invoke(ProductResponse(sku = product.sku), Constants.TYPE_CLICK_DELETE)
             }
         }
 

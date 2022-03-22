@@ -6,20 +6,16 @@ import com.example.mobileapp.utils.Constants
 
 object DataStorage {
 
+    private val mapData: MutableMap<String, Any?> = mutableMapOf()
+
+    fun checkLogin(): Boolean {
+        return (getToken() != null)
+    }
+
     fun saveToken(token: String) {
-        EasySharedPreference.putString(Constants.KEY_HEADER_TOKEN, token)
+        mapData[Constants.KEY_HEADER_TOKEN] = token
     }
 
-    fun saveUser(email: String, password: String) {
-        EasySharedPreference.putString(Constants.email, email)
-        EasySharedPreference.putString(Constants.password, password)
-    }
+    fun getToken(): String? = mapData[Constants.KEY_HEADER_TOKEN] as? String
 
-    fun getToken(): String = EasySharedPreference.getString(Constants.KEY_HEADER_TOKEN, "")
-    fun getUser(): UserResponse {
-        return UserResponse(
-            email = EasySharedPreference.getString(Constants.email, ""),
-            password = EasySharedPreference.getString(Constants.password, "")
-        )
-    }
 }

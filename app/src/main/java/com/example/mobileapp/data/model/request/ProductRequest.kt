@@ -15,8 +15,8 @@ data class ProductRequest internal constructor(
 
     @SerializedName(Constants.price)
     val price: Float,
-    @SerializedName(Constants.unit)
 
+    @SerializedName(Constants.unit)
     val unit: String,
 
     @SerializedName(Constants.status)

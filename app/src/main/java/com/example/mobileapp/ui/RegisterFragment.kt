@@ -2,6 +2,7 @@ package com.example.mobileapp.ui
 
 import android.app.ProgressDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,17 +37,22 @@ class RegisterFragment : Fragment(), ILoadingView {
 
         onActionClick()
 
-
-
         return binding?.root
     }
 
     private fun onActionClick() {
         binding?.btnSubmit?.setOnClickListener {
-            val email = binding?.edtEmail?.text.toString().trim()
-            val password = binding?.edtPassword?.text.toString().trim()
-            val confirmPassword = binding?.edtConfirmPassword?.text.toString().trim()
+            val email = binding?.edtEmail?.text.toString()
+            val password = binding?.edtPassword?.text.toString()
+            val confirmPassword = binding?.edtConfirmPassword?.text.toString()
+            Log.d(TAG, "register: $email - $password - $confirmPassword")
             if (validateRegister(email, password, confirmPassword)) doRegister(email, password)
+        }
+        binding?.icPassword?.setOnClickListener {
+            binding?.edtPassword?.let { Common.togglePassword(it) }
+        }
+        binding?.icConfirmPassword?.setOnClickListener {
+            binding?.edtConfirmPassword?.let { Common.togglePassword(it) }
         }
     }
 
@@ -78,7 +84,7 @@ class RegisterFragment : Fragment(), ILoadingView {
                 Status.LOADING -> onShowLoading()
                 Status.SUCCESS -> {
                     onHideLoading()
-                    doLogin(email, password)
+                    doLogin(binding?.edtEmail?.text.toString(), binding?.edtPassword?.text.toString())
                 }
                 Status.ERROR -> {
                     onHideLoading()
@@ -97,7 +103,6 @@ class RegisterFragment : Fragment(), ILoadingView {
                     onHideLoading()
                     it.data?.token?.let { token ->
                         DataStorage.saveToken(token)
-                        DataStorage.saveUser(email, password)
                         findNavController().navigate(R.id.productFragment)
                     }
                 }

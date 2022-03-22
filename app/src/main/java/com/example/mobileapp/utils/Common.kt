@@ -4,9 +4,12 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.text.TextUtils
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Patterns
 import android.view.KeyEvent
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatEditText
 
 object Common {
 
@@ -28,5 +31,11 @@ object Common {
 
     fun validateString(string: String): Boolean {
         return TextUtils.isEmpty(string)
+    }
+
+    fun togglePassword(edt: AppCompatEditText) {
+        if (edt.transformationMethod == HideReturnsTransformationMethod.getInstance())
+            edt.transformationMethod = PasswordTransformationMethod.getInstance()
+        else edt.transformationMethod = HideReturnsTransformationMethod.getInstance()
     }
 }

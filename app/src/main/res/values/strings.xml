@@ -28,4 +28,6 @@
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="add_product">Add product</string>
+    <string name="update_product">Update product</string>
+    <string name="search">Search product</string>
 </resources>
